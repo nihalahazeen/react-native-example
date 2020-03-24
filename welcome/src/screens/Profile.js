@@ -40,11 +40,10 @@ const styles = StyleSheet.create({
     listItem:{
         margin:10,
         padding:10,
-        backgroundColor:"#FFF",
         width:"80%",
         flex:1,
         alignSelf:"center",
-        //flexDirection:"row",
+        flexDirection:"column",
         borderRadius:5,
         alignItems:'center'
     },
