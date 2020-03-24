@@ -3,19 +3,18 @@ import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity, Button } fro
 import FlatListData from '../data';
 import Profile from './Profile'
 import {Header, Left, Right, Icon} from 'native-base'
-function Item({ item }) {
-  return (
-    <TouchableOpacity style={{flex:1}}>
-    <View style={styles.listItem}>
-            <Image source={{uri:item.picture}}  style={{width:60, height:60,borderRadius:30}} />
-            <View style={{alignItems:"center",flex:1}}>
-                <Text style={{fontWeight:"bold"}}>{item.name}</Text>
-            </View>
-    </View>
-    </TouchableOpacity>
-
-  );
-}
+//function Item({ item }) {
+//  return (
+//    <TouchableOpacity style={{flex:1}}>
+//    <View style={styles.listItem}>
+//            <Image source={{uri:item.picture}}  style={{width:60, height:60,borderRadius:30}} />
+//            <View style={{alignItems:"center",flex:1}}>
+//                <Text style={{fontWeight:"bold"}}>{item.name}</Text>
+//            </View>
+//    </View>
+//    </TouchableOpacity>
+//  );
+//}
 
 export default class Feed extends React.Component {
   constructor(props){
@@ -36,10 +35,22 @@ export default class Feed extends React.Component {
         <FlatList
           style={{flex:1}}
           data={this.state.data}
-          renderItem={({ item }) => <Item item={item}/>}
+          renderItem={({ item }) =>this._renderList(item)}
           keyExtractor={item => item.name}
         />
       </View>
+    );
+  }
+  _renderList = (item) => {
+    return (
+      <TouchableOpacity onPress={()=>this.props.navigation.navigate("Profile",{id:item._id,name:item.name,bio:item.bio,picture:item.picture})} style={{flex:1}}>
+      <View style={styles.listItem}>
+              <Image source={{uri:item.picture}}  style={{width:60, height:60,borderRadius:30}} />
+              <View style={{alignItems:"center",flex:1, marginTop:20}}>
+                  <Text style={{fontWeight:"bold"}}>{item.name}</Text>
+              </View>
+      </View>
+      </TouchableOpacity>
     );
   }
 }
